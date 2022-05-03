@@ -5,12 +5,10 @@ import { Course } from '../model/course';
   providedIn: 'root',
 })
 export class CoursesService {
+  private readonly API = '/assets/db.json';
   constructor(private httpClient: HttpClient) {}
 
-  getCourses(): Course[] {
-    return [
-      { _id: '0', name: 'Angular', category: 'front-end' },
-      { _id: '1', name: 'JavaScript', category: 'front-end' },
-    ];
+  getCourses() {
+    return this.httpClient.get<Course[]>(this.API).pipe(courses => courses );
   }
 }
